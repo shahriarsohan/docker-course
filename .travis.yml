@@ -4,3 +4,20 @@ services:
 
 before_install:
   - docker build -t sohan0077/docker-course -f Dockerfile.dev .
+
+script:
+  - docker run sohan0077/docker-course npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "ap-south-1"
+  app : "docker-test"
+  env : "DockerTest-env"
+  bucket_name : "elasticbeanstalk-ap-south-1-806822280125"
+  bucket_path : "docker-test"
+  on:
+    branch : master
+
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
