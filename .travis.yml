@@ -1,0 +1,6 @@
+sude: required
+services:
+  - docker
+
+before_install:
+  - docker build -t sohan0077/docker-course -f Dockerfile.dev .
